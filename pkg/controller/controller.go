@@ -24,10 +24,10 @@ import (
 	"time"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/bitnami-labs/kubewatch/config"
-	"github.com/bitnami-labs/kubewatch/pkg/event"
-	"github.com/bitnami-labs/kubewatch/pkg/handlers"
-	"github.com/bitnami-labs/kubewatch/pkg/utils"
+	"github.com/zczc0128/kubewatch/config"
+	"github.com/zczc0128/kubewatch/pkg/event"
+	"github.com/zczc0128/kubewatch/pkg/handlers"
+	"github.com/zczc0128/kubewatch/pkg/utils"
 
 	apps_v1beta1 "k8s.io/api/apps/v1beta1"
 	batch_v1 "k8s.io/api/batch/v1"
@@ -69,7 +69,7 @@ func Start(conf *config.Config, eventHandler handlers.Handler) {
 	var kubeClient kubernetes.Interface
 	_, err := rest.InClusterConfig()
 	if err != nil {
-		kubeClient = utils.GetClientOutOfCluster()
+		kubeClient = utils.GetClientOutOfCluster(conf.KubeconfigPath)
 	} else {
 		kubeClient = utils.GetClient()
 	}

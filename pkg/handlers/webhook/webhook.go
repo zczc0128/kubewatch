@@ -26,8 +26,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/bitnami-labs/kubewatch/config"
-	kbEvent "github.com/bitnami-labs/kubewatch/pkg/event"
+	"github.com/zczc0128/kubewatch/config"
+	kbEvent "github.com/zczc0128/kubewatch/pkg/event"
 )
 
 var webhookErrMsg = `

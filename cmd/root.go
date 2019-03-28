@@ -21,8 +21,8 @@ import (
 	"os"
 
 	"github.com/Sirupsen/logrus"
-	"github.com/bitnami-labs/kubewatch/config"
-	c "github.com/bitnami-labs/kubewatch/pkg/client"
+	"github.com/zczc0128/kubewatch/config"
+	c "github.com/zczc0128/kubewatch/pkg/client"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )

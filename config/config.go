@@ -59,6 +59,7 @@ type Config struct {
 	// for watching specific namespace, leave it empty for watching all.
 	// this config is ignored when watching namespaces
 	Namespace string `json:"namespace,omitempty"`
+	KubeconfigPath string `json:"kubeconfigpath"`
 }
 
 // Slack contains slack configuration
@@ -127,6 +128,30 @@ func (c *Config) Load() error {
 	}
 
 	file, err := os.Open(getConfigFile())
+	if err != nil {
+		return err
+	}
+
+	b, err := ioutil.ReadAll(file)
+	if err != nil {
+		return err
+	}
+
+	if len(b) != 0 {
+		return yaml.Unmarshal(b, c)
+	}
+
+	return nil
+}
+
+// Load loads configuration from config file
+func (c *Config) LoadConfigFile(configFilePath string) error {
+	err := createIfNotExist()
+	if err != nil {
+		return err
+	}
+
+	file, err := os.Open(configFilePath)
 	if err != nil {
 		return err
 	}

@@ -29,17 +29,15 @@ func GetClient() kubernetes.Interface {
 	return clientset
 }
 
-func buildOutOfClusterConfig() (*rest.Config, error) {
-	kubeconfigPath := os.Getenv("KUBECONFIG")
-	if kubeconfigPath == "" {
-		kubeconfigPath = os.Getenv("HOME") + "/.kube/config"
-	}
-	return clientcmd.BuildConfigFromFlags("", kubeconfigPath)
-}
-
 // GetClientOutOfCluster returns a k8s clientset to the request from outside of cluster
-func GetClientOutOfCluster() kubernetes.Interface {
-	config, err := buildOutOfClusterConfig()
+func GetClientOutOfCluster(kubeconfigPath string) kubernetes.Interface {
+	if kubeconfigPath == ""{
+		kubeconfigPath := os.Getenv("KUBECONFIG")
+		if kubeconfigPath == "" {
+			kubeconfigPath = os.Getenv("HOME") + "/.kube/config"
+		}
+	}
+	config, err := clientcmd.BuildConfigFromFlags("", kubeconfigPath)
 	if err != nil {
 		logrus.Fatalf("Can not get kubernetes config: %v", err)
 	}

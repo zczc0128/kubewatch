@@ -16,7 +16,7 @@ limitations under the License.
 
 package main
 
-import "github.com/bitnami-labs/kubewatch/cmd"
+import "github.com/zczc0128/kubewatch/cmd"
 
 func main() {
 	cmd.Execute()
